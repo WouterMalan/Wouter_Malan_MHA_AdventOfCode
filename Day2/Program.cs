@@ -96,14 +96,40 @@ class Program
         {
             return false;
         }
-            
-        bool isIncreasing = levels[1] > levels[0];
 
+        if (IsSafeReport(levels))
+        {
+            return true;
+        }
+
+        for (int i = 0; i < levels.Count; i++)
+        {
+            var modifiedLevels = new List<int>(levels);
+            modifiedLevels.RemoveAt(i);
+            
+            if (IsSafe(modifiedLevels))
+            {
+                return true;
+            }
+        }
+        
+        return false;
+    }
+
+    private static bool IsSafe(List<int> levels)
+    {
+        if (levels.Count < 2)
+        {
+            return false;
+        }
+        
+        bool isIncreasing = levels[1] > levels[0];
+        
         for (int i = 1; i < levels.Count; i++)
         {
             int difference = levels[i] - levels[i - 1];
-                
-            if(Math.Abs(difference) < 1 || Math.Abs(difference) > 3)
+            
+            if((Math.Abs(difference) < 1 || Math.Abs(difference) > 3))
             {
                 return false;
             }
