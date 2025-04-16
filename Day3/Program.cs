@@ -43,6 +43,13 @@ class Program
             return 0;
         }
         
+        var instructions = GetInstructions(memory);
+
+        return CaclulateInstructionTotal(instructions);
+    }
+
+    private static List<(int position, string type, Match match)> GetInstructions(string memory)
+    {
         var mulRegex = new Regex(@"mul\((\d+),(\d+)\)");
         var doRegex = new Regex(@"do\(\)");
         var dontRegex = new Regex(@"don't\(\)");
@@ -67,9 +74,41 @@ class Program
         {
             instructions.Add((match.Index, "dont", match));
         }
-
-        return 0;
-
+        
+        instructions.Sort((a,b) => a.position.CompareTo(b.position));
+        return instructions;
     }
+    
+    private static int CaclulateInstructionTotal(List<(int position, string type, Match match)> instructions)
+    {
+        var total = 0;
+        bool shouldExecute = true;
 
+        foreach (var instruction in instructions)
+        {
+            switch (instruction.type)
+            {
+                case "mul":
+                    if (shouldExecute)
+                    {
+                        int x = int.Parse(instruction.match.Groups[1].Value);
+                        int y = int.Parse(instruction.match.Groups[2].Value);
+                        total += x * y;
+                    }
+                    
+                    break;
+                case "do":
+                    shouldExecute = true;
+                    break;
+                case "dont":
+                    shouldExecute = false;
+                    break;
+                default:
+                    break;
+                
+            }
+        }
+
+        return total;
+    }
 }
