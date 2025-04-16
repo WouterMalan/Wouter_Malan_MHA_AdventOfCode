@@ -123,14 +123,12 @@ class Program
             throw new FormatException($"Invalid line format: '{line}'. Expected format: 'direction distance'.");
         }
     
-        if (int.TryParse(parts[0], out int left) && int.TryParse(parts[1], out int right))
+        if (!int.TryParse(parts[0], out int left) || !int.TryParse(parts[1], out int right))
         {
-            return (left, right);
+            throw new FormatException($"Invalid number format in line: '{line}'. Expected two integers.");
         }
-        else
-        {
-            throw new FormatException($"Invalid number format in line: '{line}'.");
-        }
+        
+        return (left, right);
     }
 
     private static int ComputeSimilarityScore(List<int> rightList, List<int> leftList)
