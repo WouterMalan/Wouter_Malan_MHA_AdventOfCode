@@ -96,28 +96,45 @@ class Program
         var rightList = new List<int>();
         var leftList = new List<int>();
         
-        string inputFileLine;
-        
-        while ((inputFileLine = reader.ReadLine()) != null)
+        while (!reader.EndOfStream)
         {
-            var parts = inputFileLine.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+            var line = reader.ReadLine();
 
-            if (parts.Length != 2)
+            if (line == null)
             {
-                throw new FormatException($"Invalid line format: '{inputFileLine}'. Expected format: 'direction distance'.");
+                continue;
             }
-
-            if (int.TryParse(parts[0], out int left) && int.TryParse(parts[1], out int right))
-            {
-                rightList.Add(right);
-                leftList.Add(left);
-            }
-            else
-            {
-                throw new FormatException($"Invalid number format in line: '{inputFileLine}'.");
-            }
+            
+           var (left, right) = ParseLine(line);
+            
+            rightList.Add(right);
+            leftList.Add(left);
         }
         
+        return ComputeSimilarityScore(rightList, leftList);
+    }
+    
+    private static (int left, int right) ParseLine(string line)
+    {
+        var parts = line.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+    
+        if (parts.Length != 2)
+        {
+            throw new FormatException($"Invalid line format: '{line}'. Expected format: 'direction distance'.");
+        }
+    
+        if (int.TryParse(parts[0], out int left) && int.TryParse(parts[1], out int right))
+        {
+            return (left, right);
+        }
+        else
+        {
+            throw new FormatException($"Invalid number format in line: '{line}'.");
+        }
+    }
+
+    private static int ComputeSimilarityScore(List<int> rightList, List<int> leftList)
+    {
         var rightCounts = new Dictionary<int, int>();
         var similarityScore = 0;
         
