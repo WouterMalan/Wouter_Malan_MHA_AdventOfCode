@@ -11,4 +11,9 @@
       <EmbeddedResource Include="Input.txt" />
     </ItemGroup>
 
+    <ItemGroup>
+      <None Remove="Input.txt" />
+      <Content Include="Input.txt" />
+    </ItemGroup>
+
 </Project>
