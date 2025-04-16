@@ -97,7 +97,7 @@ class Program
             return false;
         }
 
-        if (IsSafeReport(levels))
+        if (IsSafe(levels))
         {
             return true;
         }
