@@ -14,11 +14,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\WouterMalan\\source\\repos\\Wouter_Malan_MHA_AdventOfCode\\Day1\\Day1.csproj",
-      "projectName": "Day1",
-      "projectPath": "C:\\Users\\WouterMalan\\source\\repos\\Wouter_Malan_MHA_AdventOfCode\\Day1\\Day1.csproj",
+      "projectUniqueName": "C:\\Users\\WouterMalan\\source\\repos\\Wouter_Malan_MHA_AdventOfCode\\Day2\\Day2.csproj",
+      "projectName": "Day2",
+      "projectPath": "C:\\Users\\WouterMalan\\source\\repos\\Wouter_Malan_MHA_AdventOfCode\\Day2\\Day2.csproj",
       "packagesPath": "C:\\Users\\WouterMalan\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\WouterMalan\\source\\repos\\Wouter_Malan_MHA_AdventOfCode\\Day1\\obj\\",
+      "outputPath": "C:\\Users\\WouterMalan\\source\\repos\\Wouter_Malan_MHA_AdventOfCode\\Day2\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
