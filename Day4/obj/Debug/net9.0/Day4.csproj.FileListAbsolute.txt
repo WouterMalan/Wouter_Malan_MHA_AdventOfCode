@@ -1,0 +1,15 @@
+D:\Udemy Courses\AdvantOfCode\Day4\bin\Debug\net9.0\Day4.exe
+D:\Udemy Courses\AdvantOfCode\Day4\bin\Debug\net9.0\Day4.deps.json
+D:\Udemy Courses\AdvantOfCode\Day4\bin\Debug\net9.0\Day4.runtimeconfig.json
+D:\Udemy Courses\AdvantOfCode\Day4\bin\Debug\net9.0\Day4.dll
+D:\Udemy Courses\AdvantOfCode\Day4\bin\Debug\net9.0\Day4.pdb
+D:\Udemy Courses\AdvantOfCode\Day4\obj\Debug\net9.0\Day4.GeneratedMSBuildEditorConfig.editorconfig
+D:\Udemy Courses\AdvantOfCode\Day4\obj\Debug\net9.0\Day4.AssemblyInfoInputs.cache
+D:\Udemy Courses\AdvantOfCode\Day4\obj\Debug\net9.0\Day4.AssemblyInfo.cs
+D:\Udemy Courses\AdvantOfCode\Day4\obj\Debug\net9.0\Day4.csproj.CoreCompileInputs.cache
+D:\Udemy Courses\AdvantOfCode\Day4\obj\Debug\net9.0\Day4.sourcelink.json
+D:\Udemy Courses\AdvantOfCode\Day4\obj\Debug\net9.0\Day4.dll
+D:\Udemy Courses\AdvantOfCode\Day4\obj\Debug\net9.0\refint\Day4.dll
+D:\Udemy Courses\AdvantOfCode\Day4\obj\Debug\net9.0\Day4.pdb
+D:\Udemy Courses\AdvantOfCode\Day4\obj\Debug\net9.0\Day4.genruntimeconfig.cache
+D:\Udemy Courses\AdvantOfCode\Day4\obj\Debug\net9.0\ref\Day4.dll
