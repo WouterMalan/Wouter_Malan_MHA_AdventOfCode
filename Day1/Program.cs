@@ -1,4 +1,7 @@
-﻿using System.Reflection;
+﻿//Input file is in bin folder
+
+
+using System.Reflection;
 
 namespace Day1;
 
@@ -6,12 +9,17 @@ class Program
 {
     static void Main()
     {
-        string resourceName = "Day1.Input.txt";
-
         try
         {
-            var totalDistance = ReadInputFromEmbeddedResource(resourceName);
-            Console.WriteLine($"Total distance: {totalDistance}");
+            string[] input = System.IO.File.ReadAllLines("Input.txt");
+        
+            // Part 1:
+            var totalDistancePart1 = CalculateTotalDistancePart1(input);
+            Console.WriteLine($"Part 1 - Total distance between sorted lists: {totalDistancePart1}");
+        
+            // Part 2:
+            var similarityScore = CalculateTotalDistanceFromFile(input);
+            Console.WriteLine($"Part 2 - Similarity score: {similarityScore}");
         }
         catch (Exception e)
         {
@@ -19,143 +27,98 @@ class Program
         }
     }
 
-    //Part 1
-    // static int ReadInputFromEmbeddedResource(string resourceName)
-    // {
-    //     if (string.IsNullOrWhiteSpace(resourceName))
-    //     {
-    //         throw new ArgumentException("Resource name cannot be null or empty.", nameof(resourceName));
-    //     }
-    //     
-    //     var assembly = Assembly.GetExecutingAssembly();
-    //     
-    //     using var stream = assembly.GetManifestResourceStream(resourceName);
-    //     if (stream == null)
-    //     {
-    //         throw new FileNotFoundException(
-    //             $"Embedded resource '{resourceName}' not found. Make sure the file is set as 'Embedded Resource' in its properties.");
-    //     }
-    //
-    //     using var reader = new StreamReader(stream);
-    //     
-    //     var rightList = new List<int>();
-    //     var leftList = new List<int>();
-    //     
-    //     string inputFileLine;
-    //     
-    //     while ((inputFileLine = reader.ReadLine()) != null)
-    //     {
-    //         var parts = inputFileLine.Split(' ', StringSplitOptions.RemoveEmptyEntries);
-    //
-    //         if (parts.Length != 2)
-    //         {
-    //             throw new FormatException($"Invalid line format: '{inputFileLine}'. Expected format: 'direction distance'.");
-    //         }
-    //
-    //         if (int.TryParse(parts[0], out int left) && int.TryParse(parts[1], out int right))
-    //         {
-    //             rightList.Add(right);
-    //             leftList.Add(left);
-    //         }
-    //     }
-    //     
-    //     var totalDistance = 0;
-    //     
-    //     for (int i = 0; i < leftList.Count; i++)
-    //     {
-    //         totalDistance += Math.Abs(leftList[i] - rightList[i]);
-    //     }
-    //     
-    //     return totalDistance;
-    // }
-    
-    //Part 2
-    static int ReadInputFromEmbeddedResource(string resourceName)
+//Part 1
+    static int CalculateTotalDistancePart1(string[] input)
     {
-        if (string.IsNullOrWhiteSpace(resourceName))
+        if (input == null || input.Length == 0)
         {
-            throw new ArgumentException("Resource name cannot be null or empty.", nameof(resourceName));
-        }
-        
-        var assembly = Assembly.GetExecutingAssembly();
-        
-        using var stream = assembly.GetManifestResourceStream(resourceName);
-        if (stream == null)
-        {
-            throw new FileNotFoundException(
-                $"Embedded resource '{resourceName}' not found. Make sure the file is set as 'Embedded Resource' in its properties.");
+            throw new ArgumentException("Input cannot be null or empty.", nameof(input));
         }
 
-        using var reader = new StreamReader(stream);
-        
-        return CalculateSimilarityScore(reader);
-    }
-
-    private static int CalculateSimilarityScore(StreamReader reader)
-    {
         var rightList = new List<int>();
         var leftList = new List<int>();
-        
-        while (!reader.EndOfStream)
-        {
-            var line = reader.ReadLine();
 
-            if (line == null)
+        foreach (var line in input)
+        {
+            var parts = line.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+
+            if (parts.Length != 2)
             {
-                continue;
+                throw new FormatException($"Invalid line format: '{line}'. Expected format: 'left right'.");
             }
-            
-           var (left, right) = ParseLine(line);
-            
-            rightList.Add(right);
+
+            if (!int.TryParse(parts[0], out int left))
+            {
+                throw new FormatException($"Invalid number format for 'left' in line: '{line}'.");
+            }
+
+            if (!int.TryParse(parts[1], out int right))
+            {
+                throw new FormatException($"Invalid number format for 'right' in line: '{line}'.");
+            }
+
             leftList.Add(left);
+            rightList.Add(right);
         }
-        
-        return ComputeSimilarityScore(rightList, leftList);
-    }
-    
-    private static (int left, int right) ParseLine(string line)
-    {
-        var parts = line.Split(' ', StringSplitOptions.RemoveEmptyEntries);
-    
-        if (parts.Length != 2)
+
+        leftList.Sort();
+        rightList.Sort();
+
+        int totalDistance = 0;
+
+        for (int i = 0; i < leftList.Count; i++)
         {
-            throw new FormatException($"Invalid line format: '{line}'. Expected format: 'direction distance'.");
+            int distance = Math.Abs(leftList[i] - rightList[i]);
+            totalDistance += distance;
         }
-    
-        if (!int.TryParse(parts[0], out int left) || !int.TryParse(parts[1], out int right))
-        {
-            throw new FormatException($"Invalid number format in line: '{line}'. Expected two integers.");
-        }
-        
-        return (left, right);
+
+        return totalDistance;
     }
 
-    private static int ComputeSimilarityScore(List<int> rightList, List<int> leftList)
+    
+    //Part 2
+    static int CalculateTotalDistanceFromFile(string[] input)
     {
-        var rightCounts = new Dictionary<int, int>();
-        var similarityScore = 0;
-        
-        foreach (var number in rightList)
+        if (input == null || input.Length == 0)
         {
-            if (rightCounts.ContainsKey(number))
-            {
-                rightCounts[number]++;
-            }
-            else
-            {
-                rightCounts[number] = 1;
-            }
+            throw new ArgumentException("Input cannot be null or empty.", nameof(input));
         }
-        
-        foreach (var leftNum in leftList)
+    
+        var rightList = new List<int>();
+        var leftList = new List<int>();
+    
+        foreach (var line in input)
         {
-            if (rightCounts.TryGetValue(leftNum, out int count))
+            var parts = line.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+    
+            if (parts.Length != 2)
             {
-                similarityScore += leftNum * count;
+                throw new FormatException($"Invalid line format: '{line}'. Expected format: 'left right'.");
             }
+    
+            if (!int.TryParse(parts[0], out int left))
+            {
+                throw new FormatException($"Invalid number format for 'left' in line: '{line}'.");
+            }
+    
+            if (!int.TryParse(parts[1], out int right))
+            {
+                throw new FormatException($"Invalid number format for 'right' in line: '{line}'.");
+            }
+    
+            leftList.Add(left);
+            rightList.Add(right);
         }
-        
+    
+        int similarityScore = 0;
+      
+        foreach (int leftNumber in leftList)
+        {
+            int occurrences = rightList.Count(r => r == leftNumber);
+          
+            similarityScore += leftNumber * occurrences;
+        }
+    
         return similarityScore;
     }
 }
