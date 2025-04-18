@@ -1,4 +1,5 @@
 ﻿using System.Text.RegularExpressions;
+//Input file is in bin folder
 
 namespace Day3;
 
@@ -7,36 +8,42 @@ class Program
     static void Main()
     {
         string input = System.IO.File.ReadAllText("Input.txt");
-        int memory = SumValidMultiplications(input);
-        Console.WriteLine($"Total valid memory: {memory}");
+
+        //Part 1
+        int memory1 = SumValidMultiplicationsPart1(input);
+        Console.WriteLine($"Part 1: Total valid memory: {memory1}");
+        
+        int memory2 = SumValidMultiplicationsPart2(input);
+        Console.WriteLine($"Total valid memory: {memory2}");
+
     }
     
     //Part1
-    // static int SumValidMultiplications(string memory)
-    // {
-    //     if (memory == null || memory.Length == 0)
-    //     {
-    //         return 0;
-    //     }
-    //     
-    //     var regex = new Regex(@"mul\((\d+),(\d+)\)");
-    //     var regexMatches = regex.Matches(memory);
-    //     var total = 0;
-    //     
-    //     foreach (Match match in regexMatches)
-    //     {
-    //         int x = int.Parse(match.Groups[1].Value);
-    //         int y = int.Parse(match.Groups[2].Value);
-    //         
-    //         total += x * y;
-    //     }
-    //
-    //     return total;
-    //
-    // }
+    static int SumValidMultiplicationsPart1(string memory)
+    {
+        if (memory == null || memory.Length == 0)
+        {
+            return 0;
+        }
+        
+        var regex = new Regex(@"mul\((\d+),(\d+)\)");
+        var regexMatches = regex.Matches(memory);
+        var total = 0;
+        
+        foreach (Match match in regexMatches)
+        {
+            int x = int.Parse(match.Groups[1].Value);
+            int y = int.Parse(match.Groups[2].Value);
+            
+            total += x * y;
+        }
+    
+        return total;
+    
+    }
     
     //Part 2
-    static int SumValidMultiplications(string memory)
+    static int SumValidMultiplicationsPart2(string memory)
     {
         if (memory == null || memory.Length == 0)
         {
