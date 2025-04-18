@@ -1,4 +1,5 @@
-﻿namespace Day6
+﻿//Input file is in bin folder
+namespace Day6
 {
     class Program
     {
@@ -6,6 +7,7 @@
         {
             string input = System.IO.File.ReadAllText("Input.txt");
 
+            //Part 1
             int sum = CountGuardVisitedPositions(input);
             Console.WriteLine($"Number of distinct guard visits: {sum}");
         }

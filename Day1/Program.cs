@@ -1,8 +1,5 @@
 ﻿//Input file is in bin folder
 
-
-using System.Reflection;
-
 namespace Day1;
 
 class Program

@@ -1,5 +1,5 @@
-﻿using System.Text.RegularExpressions;
-//Input file is in bin folder
+﻿//Input file is in bin folder
+using System.Text.RegularExpressions;
 
 namespace Day3;
 
