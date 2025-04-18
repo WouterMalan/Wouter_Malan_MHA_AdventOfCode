@@ -7,7 +7,7 @@ namespace Day4
         {
             string input = System.IO.File.ReadAllText("Input.txt");
             
-            
+            //Part 1
             int count1 = CountXMasPatternsPart1(input);
             Console.WriteLine($"Part 1: XMAS appears {count1} times");
             

@@ -13,6 +13,7 @@ class Program
         int memory1 = SumValidMultiplicationsPart1(input);
         Console.WriteLine($"Part 1: Total valid memory: {memory1}");
         
+        //Part 2
         int memory2 = SumValidMultiplicationsPart2(input);
         Console.WriteLine($"Part 2: Total valid memory: {memory2}");
 
